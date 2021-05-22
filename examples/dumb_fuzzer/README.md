@@ -9,13 +9,18 @@ It uses the latest version of TockOS kernel (version on master branch) without b
 After flashing the kernel, go to the corresponding dumb_fuzzer application folder: **libtock-c/examples/dumb_fuzzer** and run **make**.
 
 Load the application onto the board with tockloader:
-**tockloader install --board microbit_v2 --openocd ./build/dumb_fuzzer.tab**
+```
+tockloader install --board microbit_v2 --openocd ./build/dumb_fuzzer.tab
+```
 
 Open the serial to see the logging:
-**tockloader listen**
+```
+tockloader listen
+```
 
 After a few lines, the application will crash with a similar output as the one below:
 
+```
 panicked at 'Process dumb_fuzzer had a fault', kernel/src/process_standard.rs:287:17
 	Kernel version release-1.6-1488-gbf54e789c
 
@@ -109,10 +114,11 @@ Hard Fault Status Register (HFSR):  0x40000000
 
 To debug, run `make debug RAM_START=0x20004000 FLASH_INIT=0x40059`
 in the app's folder and open the .lst file.
-
+```
 
 When inspecting the .lst file, we can see that the program had a fault in **allow_readonly** function, at the driver number cmp instruction:
 
+```
 0004068c <allow_readonly>:
 allow_ro_return_t allow_readonly(uint32_t driver, uint32_t allow, const void* ptr, size_t size) {
    4068c:       b510            push    {r4, lr}
@@ -137,4 +143,4 @@ allow_ro_return_t allow_readonly(uint32_t driver, uint32_t allow, const void* pt
    406a6:       2300            movs    r3, #0
    406a8:       7323            strb    r3, [r4, #12]
 }
-  
+```
