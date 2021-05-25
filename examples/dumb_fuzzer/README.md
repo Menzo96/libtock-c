@@ -144,3 +144,164 @@ allow_ro_return_t allow_readonly(uint32_t driver, uint32_t allow, const void* pt
    406a8:       7323            strb    r3, [r4, #12]
 }
 ```
+
+
+//TODO
+Make new section
+
+I started this fuzzing project intially on a 1.6 TockOS version. I haven't used the release-1.6 version from the repository's tags since it didn't yet had support for the board I'm using (microbit V2). 
+
+More specifically, I used the following tock-os and libtock-c versions:
+
+tock:
+commit f01a807e206f74828140be7e4d99df012467aaa3 
+
+
+libtock-c:
+commit cd3100f82ddb62e92706976f089b29fd64a0aeb4 
+
+The code I started with is similar with this one but with a simple allow system call (see TODO - add file).
+
+On the application side I get a similar fault:
+
+```
+panicked at 'Process dumb_fuzzer had a fault', kernel/src/process.rs:990:17
+	Kernel version release-1.6-723-gcf5819e98
+
+---| No debug queue found. You can set it with the DebugQueue component.
+
+---| Fault Status |---
+Data Access Violation:              true
+Forced Hard Fault:                  true
+Faulting Memory Address:            0x00000000
+Fault Status Register (CFSR):       0x00000082
+Hard Fault Status Register (HFSR):  0x40000000
+
+---| App Status |---
+App: dumb_fuzzer   -   [Fault]
+ Events Queued: 0   Syscall Count: 1900   Dropped Callback Count: 0
+ Restart Count: 0
+ Last Syscall: Some(MEMOP { operand: 1, arg0: 108 })
+
+
+ ╔═══════════╤══════════════════════════════════════════╗
+ ║  Address  │ Region Name    Used | Allocated (bytes)  ║
+ ╚0x20006000═╪══════════════════════════════════════════╝
+             │ ▼ Grant        1296 |   1296          
+  0x20005AF0 ┼───────────────────────────────────────────
+             │ Unused
+  0x2000579C ┼───────────────────────────────────────────
+             │ ▲ Heap         3516 |   4368               S
+  0x200049E0 ┼─────────────────────────────────────────── R
+             │ Data            480 |    480               A
+  0x20004800 ┼─────────────────────────────────────────── M
+             │ ▼ Stack         656 |   2048          
+  0x20004570 ┼───────────────────────────────────────────
+             │ Unused
+  0x20004000 ┴───────────────────────────────────────────
+             .....
+  0x00044000 ┬─────────────────────────────────────────── F
+             │ App Flash     16256                        L
+  0x00040080 ┼─────────────────────────────────────────── A
+             │ Protected       128                        S
+  0x00040000 ┴─────────────────────────────────────────── H
+
+  R0 : 0x00000001    R6 : 0x00000000
+  R1 : 0x00000001    R7 : 0x20005038
+  R2 : 0x20005038    R8 : 0x200049D8
+  R3 : 0x0000001C    R10: 0x00041F10
+  R4 : 0x0000001C    R11: 0x00000001
+  R5 : 0x00041C71    R12: 0x00000000
+  R9 : 0x00041EBE (Static Base Register)
+  SP : 0x200045F0 (Process Stack Pointer)
+  LR : 0x00041BC7
+  PC : 0x000405BC
+ YPC : 0x000405C2
+
+ APSR: N 0 Z 0 C 1 V 0 Q 0
+       GE 0 0 0 0
+ EPSR: ICI.IT 0x00
+       ThumbBit true 
+
+ Cortex-M MPU
+  Region 0: [0x20004000:0x20006000], length: 8192 bytes; ReadWrite (0x3)
+    Sub-region 0: [0x20004000:0x20004400], Enabled
+    Sub-region 1: [0x20004400:0x20004800], Enabled
+    Sub-region 2: [0x20004800:0x20004C00], Enabled
+    Sub-region 3: [0x20004C00:0x20005000], Enabled
+    Sub-region 4: [0x20005000:0x20005400], Enabled
+    Sub-region 5: [0x20005400:0x20005800], Enabled
+    Sub-region 6: [0x20005800:0x20005C00], Disabled
+    Sub-region 7: [0x20005C00:0x20006000], Disabled
+  Region 1: [0x00040000:0x00044000], length: 16384 bytes; UnprivilegedReadOnly (0x2)
+    Sub-region 0: [0x00040000:0x00040800], Enabled
+    Sub-region 1: [0x00040800:0x00041000], Enabled
+    Sub-region 2: [0x00041000:0x00041800], Enabled
+    Sub-region 3: [0x00041800:0x00042000], Enabled
+    Sub-region 4: [0x00042000:0x00042800], Enabled
+    Sub-region 5: [0x00042800:0x00043000], Enabled
+    Sub-region 6: [0x00043000:0x00043800], Enabled
+    Sub-region 7: [0x00043800:0x00044000], Enabled
+  Region 2: Unused
+  Region 3: Unused
+  Region 4: Unused
+  Region 5: Unused
+  Region 6: Unused
+  Region 7: Unused
+
+To debug, run `make lst` in the app's folder
+and open the arch.0x40080.0x20004000.lst file.
+```
+
+It looks like the fault is on the application side with a Faulting Memory Address of 0x00.
+
+If we look at the registers (especially the PC) and look into the **arch.0x40080.0x20004000.lst file** we observe that the fault is in the allow systemcall maybe in the svc handler.
+
+```
+000405bc <allow>:
+  __asm__ volatile (
+   405bc:       df03            svc     3
+}
+   405be:       4770            bx      lr
+```
+
+From the LR register we can also deduce that the allow syscall was called from **putnstr_async** function.
+
+I have successfully managed to re-compile my application in order to run at a fixed address and then used gdb-multiarch. I managed to get the backtrace when this fault happens.
+
+![image info](./application_allow_fault.png)
+
+I seems that something strange happens inside the svc handler ***only at this combination of parameters passed to the allow syscall***
+
+I have also tried debugging from the kernel side.
+
+The following assembly code was added in the ***arch/cortex-m/src/lib.rs*** file, inside the **svc_handler** to help catch the fault:
+```
+ /// This is called after a `svc` instruction, both when switching to userspace
+/// and when userspace makes a system call.
+#[cfg(all(target_arch = "arm", target_os = "none"))]
+#[naked]
+pub unsafe extern "C" fn svc_handler() {
+    asm!(
+        "
+    // First check to see which direction we are going in. If the link register
+    // is something other than 0xfffffff9, then we are coming from an app which
+    // has called a syscall.
+
+    push {{r5}}
+    movw r5, #0x5038
+    movt r5, #0x2000
+    subs r5, r5, r2
+    bne next
+    bkpt
+    next:
+    pop {{r5}}
+...
+```
+It basically stops if the R2 is equal to the problematic memory address 0x20005038.
+
+I ran gdb-multiarch on this code and if faulted when returning from the svc_handler, on the last ***bx lr*** instruction.
+
+![image info](./kenel_svc_fault.png)
+
+
