@@ -171,7 +171,7 @@ commit f01a807e206f74828140be7e4d99df012467aaa3
 libtock-c:
 commit cd3100f82ddb62e92706976f089b29fd64a0aeb4 
 
-The code I started with is similar with this one but with a simple allow system call (see main_v1.6.c.old file).
+The code I started with is similar with this one but with a simple allow system call (see main_v1.6.c file).
 
 On the application side I get a similar fault:
 
