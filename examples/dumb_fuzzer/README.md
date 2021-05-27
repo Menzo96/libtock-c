@@ -1,10 +1,17 @@
 Dumb Fuzzer
 ==========
 
-This application is a very simple fuzzer that tries a few Tock OS system calls (allow_readwrite, subscribe, command) with random values / uninitialise as parameters and logs the fuzzing process on the console.
+This is a sample program highlighting an issue I
+discovered while working with Tock. It manifests as a crash on the application side but upon further investigation it seemed to crash in kernel space on a ***bx lr*** (this is from Tock v1.6, for more details see ***Context*** section below). The tock v 2.0 crashes on the application side on a cmp instruction.
 
-This application is tested and developed for the Microbit V2 boards.
-It uses the latest version of TockOS kernel (version on master branch) without bootloader (**tock/boards/microbit_v2/layout.ld**).
+This application is a very simple fuzzer that tries a few Tock OS system calls (allow_readwrite, subscribe, command) with random / uninitialised values as parameters and logs the fuzzing process on the console.
+
+To get a more context on this issue and how I got here, please read ***Context*** section below.
+
+This application is tested and developed for the Microbit V2 board.
+It uses the latest version of TockOS kernel (the version on master branch) flashed without bootloader (**tock/boards/microbit_v2/layout.ld**). The libtock-c version is also the latest (from master branch).
+
+Steps:
 
 After flashing the kernel, go to the corresponding dumb_fuzzer application folder: **libtock-c/examples/dumb_fuzzer** and run **make**.
 
@@ -18,7 +25,7 @@ Open the serial to see the logging:
 tockloader listen
 ```
 
-After a few lines, the application will crash with a similar output as the one below:
+After a few logging lines, the application will crash with a similar output as the one below:
 
 ```
 panicked at 'Process dumb_fuzzer had a fault', kernel/src/process_standard.rs:287:17
@@ -116,7 +123,7 @@ To debug, run `make debug RAM_START=0x20004000 FLASH_INIT=0x40059`
 in the app's folder and open the .lst file.
 ```
 
-When inspecting the .lst file, we can see that the program had a fault in **allow_readonly** function, at the driver number cmp instruction:
+When inspecting the .lst file, we can see that the program had a fault in **allow_readonly** function, at the driver number cmp instruction (address 4069a can be seen in PC register):
 
 ```
 0004068c <allow_readonly>:
@@ -134,7 +141,7 @@ allow_ro_return_t allow_readonly(uint32_t driver, uint32_t allow, const void* pt
   __asm__ volatile (
    40698:       df04            svc     4
   if (rtype == TOCK_SYSCALL_SUCCESS_U32_U32) {
-   ***4069a:       2882            cmp     r0, #130        ; 0x82***
+   4069a:       2882            cmp     r0, #130        ; 0x82
    4069c:       d107            bne.n   406ae <allow_readonly+0x22>
     return rv;
    4069e:       2301            movs    r3, #1
@@ -145,9 +152,13 @@ allow_ro_return_t allow_readonly(uint32_t driver, uint32_t allow, const void* pt
 }
 ```
 
+I haven't found out the cause of this issue yet. Am I using the TockOS and libtock-c correctly? Do you have any idea what is the cause? Any suggestion on how to investigate it further?
 
-//TODO
-Make new section
+
+
+Context
+==========
+
 
 I started this fuzzing project intially on a 1.6 TockOS version. I haven't used the release-1.6 version from the repository's tags since it didn't yet had support for the board I'm using (microbit V2). 
 
@@ -160,7 +171,7 @@ commit f01a807e206f74828140be7e4d99df012467aaa3
 libtock-c:
 commit cd3100f82ddb62e92706976f089b29fd64a0aeb4 
 
-The code I started with is similar with this one but with a simple allow system call (see TODO - add file).
+The code I started with is similar with this one but with a simple allow system call (see main_v1.6.c.old file).
 
 On the application side I get a similar fault:
 
@@ -303,5 +314,3 @@ It basically stops if the R2 is equal to the problematic memory address 0x200050
 I ran gdb-multiarch on this code and if faulted when returning from the svc_handler, on the last ***bx lr*** instruction.
 
 ![image info](./kenel_svc_fault.png)
-
-
