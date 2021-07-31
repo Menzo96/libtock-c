@@ -1,0 +1,211 @@
+/**********************************/
+
+Code with no systemcalls, no random number generation, just printfs.
+
+Corresponding code main.c.
+
+It appears really hard after a few tens of minutes and not every time.
+I have reset the board from time to time.
+
+/**********************************/
+
+
+
+[0] schedule[0x1:1] @0x41c49(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = 0xfffffff7 = ENOMEM
+[0] allow(0x1, 1, @0x20005190, 0x2a) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x2a, 0x0) = 0x0 = SUCCESS
+[0] yield
+command: An invalid parameter was passed
+[0] schedule[0x1:1] @0x41c49(0x2a, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x2a, 0x0, 0x0, 0x0)
+[0] allow(0x1, 1, @0x200050f0, 0x13) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x13, 0x0) = 0x0 = SUCCESS
+[0] yield
+Command number: 6
+[0] schedule[0x1:1] @0x41c49(0x13, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x13, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = 0x8000 = SuccessWithValue { value: 32768 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb71657 = SuccessWithValue { value: 11998807 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb7165f = SuccessWithValue { value: 11998815 }
+[0] remove_pending_callbacks[0x0:0] = 0 callback(s) removed
+[0] subscribe(0x0, 0, @0x402c9, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x0, 4, 0xb722d7, 0x0) = 0xb722d7 = SuccessWithValue { value: 12002007 }
+[0] yield
+[0] schedule[0x0:0] @0x402c9(0xb722d7, 0xb722d7, 0x0, 0x0) = true
+[0] function_call @0x402c9(0xb722d7, 0xb722d7, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb722e7 = SuccessWithValue { value: 12002023 }
+[0] allow(0x1, 1, @0x20005100, 0x2) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x2, 0x0) = 0x0 = SUCCESS
+[0] yield
+
+[0] schedule[0x1:1] @0x41c49(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = 0xfffffff7 = ENOMEM
+[0] allow(0x1, 1, @0x20005190, 0x28) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x28, 0x0) = 0x0 = SUCCESS
+[0] yield
+command: Operation cancelled by a call
+[0] schedule[0x1:1] @0x41c49(0x28, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x28, 0x0, 0x0, 0x0)
+[0] allow(0x1, 1, @0x200050f0, 0x13) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x13, 0x0) = 0x0 = SUCCESS
+[0] yield
+Command number: 8
+[0] schedule[0x1:1] @0x41c49(0x13, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x13, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = 0x8000 = SuccessWithValue { value: 32768 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb73052 = SuccessWithValue { value: 12005458 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb73059 = SuccessWithValue { value: 12005465 }
+[0] remove_pending_callbacks[0x0:0] = 0 callback(s) removed
+[0] subscribe(0x0, 0, @0x402c9, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x0, 4, 0xb73cd2, 0x0) = 0xb73cd2 = SuccessWithValue { value: 12008658 }
+[0] yield
+[0] schedule[0x0:0] @0x402c9(0xb73cd2, 0xb73cd2, 0x0, 0x0) = true
+[0] function_call @0x402c9(0xb73cd2, 0xb73cd2, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb73ce2 = SuccessWithValue { value: 12008674 }
+[0] allow(0x1, 1, @0x20005100, 0x2) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x2, 0x0) = 0x0 = SUCCESS
+[0] yield
+
+[0] schedule[0x1:1] @0x41c49(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = 0xfffffff7 = ENOMEM
+[0] allow(0x1, 1, @0x20005190, 0x2e) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x2e, 0x0) = 0x0 = SUCCESS
+[0] yield
+command: Operation or command is unsupported
+[0] schedule[0x1:1] @0x41c49(0x2e, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x2e, 0x0, 0x0, 0x0)
+[0] allow(0x1, 1, @0x200050f0, 0x14) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x14, 0x0) = 0x0 = SUCCESS
+[0] yield
+Command number: 10
+[0] schedule[0x1:1] @0x41c49(0x14, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41c49(0x14, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = 0x8000 = SuccessWithValue { value: 32768 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb74a61 = SuccessWithValue { value: 12012129 }
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb74a69 = SuccessWithValue { value: 12012137 }
+[0] remove_pending_callbacks[0x0:0] = 0 callback(s) removed
+[0] subscribe(0x0, 0, @0x402c9, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x0, 4, 0xb756e1, 0x0) = 0xb756e1 = SuccessWithValue { value: 12015329 }
+[0] yield
+[0] schedule[0x0:0] @0x402c9(0xb756e1, 0xb756e1, 0x0, 0x0) = true
+[0] function_call @0x402c9(0xb756e1, 0xb756e1, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = 0xb756f1 = SuccessWithValue { value: 12015345 }
+[0] allow(0x1, 1, @0x20005100, 0x2) = 0x0 = SUCCESS
+[0] remove_pending_callbacks[0x1:1] = 0 callback(s) removed
+[0] subscribe(0x1, 1, @0x41c49, 0x0) = 0x0 = SUCCESS
+[0] cmd(0x1, 1, 0x2, 0x0) = 0x0 = SUCCESS
+[0] yield
+
+[0] schedule[0x1:1] @0x41c49(0x2, 0x0, 0x0, 0x0) = true
+
+panicked at 'Process dumb_fuzzer had a fault', kernel/src/process.rs:990:17
+	Kernel version release-1.6-722-gf01a807e2
+
+---| Debug buffer not empty. Flushing. May repeat some of last message(s):
+[0] function_call @0x41c49(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x3) = 0x200057a8 = SuccessWithValue { value: 536893352 }
+
+---| No debug queue found. You can set it with the DebugQueue component.
+
+---| Fault Status |---
+Data Access Violation:              true
+Forced Hard Fault:                  true
+Faulting Memory Address:            0x00000004
+Fault Status Register (CFSR):       0x00000082
+Hard Fault Status Register (HFSR):  0x40000000
+
+---| App Status |---
+App: dumb_fuzzer   -   [Fault]
+ Events Queued: 0   Syscall Count: 189063   Dropped Callback Count: 0
+ Restart Count: 0
+ Last Syscall: Some(MEMOP { operand: 1, arg0: 3 })
+
+
+ ╔═══════════╤══════════════════════════════════════════╗
+ ║  Address  │ Region Name    Used | Allocated (bytes)  ║
+ ╚0x20006000═╪══════════════════════════════════════════╝
+             │ ▼ Grant        1196 |   1196          
+  0x20005B54 ┼───────────────────────────────────────────
+             │ Unused
+  0x200057AB ┼───────────────────────────────────────────
+             │ ▲ Heap         3311 |   4248               S
+  0x20004ABC ┼─────────────────────────────────────────── R
+             │ Data            700 |    700               A
+  0x20004800 ┼─────────────────────────────────────────── M
+             │ ▼ Stack         672 |   2048          
+  0x20004560 ┼───────────────────────────────────────────
+             │ Unused
+  0x20004000 ┴───────────────────────────────────────────
+             .....
+  0x00044000 ┬─────────────────────────────────────────── F
+             │ App Flash     16336                        L
+  0x00040030 ┼─────────────────────────────────────────── A
+             │ Protected        48                        S
+  0x00040000 ┴─────────────────────────────────────────── H
+
+  R0 : 0x00000001    R6 : 0x00000000
+  R1 : 0x00000001    R7 : 0x20005190
+  R2 : 0x20005190    R8 : 0x20004AB4
+  R3 : 0x0000002D    R10: 0x5A15D000
+  R4 : 0x0000002D    R11: 0x00000001
+  R5 : 0x00041C49    R12: 0x0004023F
+  R9 : 0x20004800 (Static Base Register)
+  SP : 0x20004588 (Process Stack Pointer)
+  LR : 0x00041B93
+  PC : 0x000404DA
+ YPC : 0x000404DE
+
+ APSR: N 0 Z 0 C 1 V 0 Q 0
+       GE 0 0 0 0
+ EPSR: ICI.IT 0x00
+       ThumbBit true 
+
+ Cortex-M MPU
+  Region 0: [0x20004000:0x20006000], length: 8192 bytes; ReadWrite (0x3)
+    Sub-region 0: [0x20004000:0x20004400], Enabled
+    Sub-region 1: [0x20004400:0x20004800], Enabled
+    Sub-region 2: [0x20004800:0x20004C00], Enabled
+    Sub-region 3: [0x20004C00:0x20005000], Enabled
+    Sub-region 4: [0x20005000:0x20005400], Enabled
+    Sub-region 5: [0x20005400:0x20005800], Enabled
+    Sub-region 6: [0x20005800:0x20005C00], Disabled
+    Sub-region 7: [0x20005C00:0x20006000], Disabled
+  Region 1: [0x00040000:0x00044000], length: 16384 bytes; UnprivilegedReadOnly (0x2)
+    Sub-region 0: [0x00040000:0x00040800], Enabled
+    Sub-region 1: [0x00040800:0x00041000], Enabled
+    Sub-region 2: [0x00041000:0x00041800], Enabled
+    Sub-region 3: [0x00041800:0x00042000], Enabled
+    Sub-region 4: [0x00042000:0x00042800], Enabled
+    Sub-region 5: [0x00042800:0x00043000], Enabled
+    Sub-region 6: [0x00043000:0x00043800], Enabled
+    Sub-region 7: [0x00043800:0x00044000], Enabled
+  Region 2: Unused
+  Region 3: Unused
+  Region 4: Unused
+  Region 5: Unused
+  Region 6: Unused
+  Region 7: Unused
+
+To debug, run `make debug RAM_START=0x20004000 FLASH_INIT=0x40059`
+in the app's folder and open the .lst file.
+

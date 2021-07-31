@@ -1,0 +1,222 @@
+/**********************************/
+
+Code without systemcalls, no random number generation. Just printfs.
+
+Corresponding code main.c.
+
+It appears easily: in a few seconds, every time.
+
+/**********************************/
+
+
+[0] schedule[0x1:1] @0x41e25(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = SuccessU32(536893032)
+[0] read-only allow(0x1, 1, @0x20005190, 0x2d) = AllowReadOnlySuccess(0x20005100, 2)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x2d, 0x0) = Success
+[0] yield. which: 1
+command: Device is not physically installed
+[0] schedule[0x1:1] @0x41e25(0x2d, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2d, 0x0, 0x0, 0x0)
+[0] read-only allow(0x1, 1, @0x200050f0, 0x14) = AllowReadOnlySuccess(0x20005190, 45)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x14, 0x0) = Success
+[0] yield. which: 1
+Command number: 12
+[0] schedule[0x1:1] @0x41e25(0x14, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x14, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = SuccessU32(32768)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(90921)
+[0] remove_pending_upcalls[0x0:0] = 0 upcall(s) removed
+[0] subscribe(0x0, 0, @0x40239, 0x0) = SubscribeSuccess(0x40239, 0)
+[0] cmd(0x0, 6, 0x16329, 0xc80) = SuccessU32(94121)
+[0] yield. which: 1
+[0] schedule[0x0:0] @0x40239(0x16fa9, 0x16fa9, 0x0, 0x0) = true
+[0] function_call @0x40239(0x16fa9, 0x16fa9, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(94137)
+[0] read-only allow(0x1, 1, @0x20005100, 0x2) = AllowReadOnlySuccess(0x200050f0, 20)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x2, 0x0) = Success
+[0] yield. which: 1
+
+[0] schedule[0x1:1] @0x41e25(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = SuccessU32(536893140)
+[0] read-only allow(0x1, 1, @0x200051a0, 0x20) = AllowReadOnlySuccess(0x20005100, 2)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x20, 0x0) = Success
+[0] yield. which: 1
+command: Device does not exist
+[0] schedule[0x1:1] @0x41e25(0x20, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x20, 0x0, 0x0, 0x0)
+[0] read-only allow(0x1, 1, @0x200050f0, 0x14) = AllowReadOnlySuccess(0x200051a0, 32)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x14, 0x0) = Success
+[0] yield. which: 1
+Command number: 11
+[0] schedule[0x1:1] @0x41e25(0x14, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x14, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = SuccessU32(32768)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(97874)
+[0] remove_pending_upcalls[0x0:0] = 0 upcall(s) removed
+[0] subscribe(0x0, 0, @0x40239, 0x0) = SubscribeSuccess(0x40239, 0)
+[0] cmd(0x0, 6, 0x17e52, 0xc80) = SuccessU32(101074)
+[0] yield. which: 1
+[0] schedule[0x0:0] @0x40239(0x18ad2, 0x18ad2, 0x0, 0x0) = true
+[0] function_call @0x40239(0x18ad2, 0x18ad2, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(101090)
+[0] read-only allow(0x1, 1, @0x20005100, 0x2) = AllowReadOnlySuccess(0x200050f0, 20)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x2, 0x0) = Success
+[0] yield. which: 1
+
+[0] schedule[0x1:1] @0x41e25(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = SuccessU32(536893248)
+[0] read-only allow(0x1, 1, @0x20005190, 0x2e) = AllowReadOnlySuccess(0x20005100, 2)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x2e, 0x0) = Success
+[0] yield. which: 1
+command: Operation or command is unsupported
+[0] schedule[0x1:1] @0x41e25(0x2e, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2e, 0x0, 0x0, 0x0)
+[0] read-only allow(0x1, 1, @0x200050f0, 0x14) = AllowReadOnlySuccess(0x20005190, 46)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x14, 0x0) = Success
+[0] yield. which: 1
+Command number: 10
+[0] schedule[0x1:1] @0x41e25(0x14, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x14, 0x0, 0x0, 0x0)
+[0] cmd(0x0, 1, 0x0, 0x0) = SuccessU32(32768)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(104869)
+[0] remove_pending_upcalls[0x0:0] = 0 upcall(s) removed
+[0] subscribe(0x0, 0, @0x40239, 0x0) = SubscribeSuccess(0x40239, 0)
+[0] cmd(0x0, 6, 0x199a5, 0xc80) = SuccessU32(108069)
+[0] yield. which: 1
+[0] schedule[0x0:0] @0x40239(0x1a625, 0x1a625, 0x0, 0x0) = true
+[0] function_call @0x40239(0x1a625, 0x1a625, 0x0, 0x0)
+[0] cmd(0x0, 2, 0x0, 0x0) = SuccessU32(108085)
+[0] read-only allow(0x1, 1, @0x20005100, 0x2) = AllowReadOnlySuccess(0x200050f0, 20)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x2, 0x0) = Success
+[0] yield. which: 1
+
+[0] schedule[0x1:1] @0x41e25(0x2, 0x0, 0x0, 0x0) = true
+[0] function_call @0x41e25(0x2, 0x0, 0x0, 0x0)
+[0] read-only allow(0x1, 1, @0x200050f0, 0x12) = AllowReadOnlySuccess(0x20005100, 2)
+[0] remove_pending_upcalls[0x1:1] = 0 upcall(s) removed
+[0] subscribe(0x1, 1, @0x41e25, 0x0) = SubscribeSuccess(0x41e25, 0)
+[0] cmd(0x1, 1, 0x12, 0x0) = Success
+[0] yield. which: 1
+Driver number: 0
+[0] schedule[0x1:1] @0x41e25(0x12, 0x0, 0x0, 0x0) = true
+
+panicked at 'Process dumb_fuzzer had a fault', kernel/src/process_standard.rs:287:17
+	Kernel version release-1.6-1488-gbf54e789c
+
+---| Debug buffer not empty. Flushing. May repeat some of last message(s):
+[0] function_call @0x41e25(0x12, 0x0, 0x0, 0x0)
+[0] memop(1, 0x6c) = Failure(NOMEM)
+
+---| No debug queue found. You can set it with the DebugQueue component.
+
+---| Cortex-M Fault Status |---
+Data Access Violation:              true
+Forced Hard Fault:                  true
+Faulting Memory Address:            0x00000000
+Fault Status Register (CFSR):       0x00000082
+Hard Fault Status Register (HFSR):  0x40000000
+
+---| App Status |---
+𝐀𝐩𝐩: dumb_fuzzer   -   [Faulted]
+ Events Queued: 0   Syscall Count: 312   Dropped Upcall Count: 0
+ Restart Count: 0
+ Last Syscall: Some(Memop { operand: 1, arg0: 108 })
+
+
+ ╔═══════════╤══════════════════════════════════════════╗
+ ║  Address  │ Region Name    Used | Allocated (bytes)  ║
+ ╚0x20006000═╪══════════════════════════════════════════╝
+             │ ▼ Grant        1208 |   1208          
+  0x20005B48 ┼───────────────────────────────────────────
+             │ Unused
+  0x200057AC ┼───────────────────────────────────────────
+             │ ▲ Heap         3308 |   4232               S
+  0x20004AC0 ┼─────────────────────────────────────────── R
+             │ Data            704 |    704               A
+  0x20004800 ┼─────────────────────────────────────────── M
+             │ ▼ Stack        2048 |   2048          
+  0x20004000 ┼───────────────────────────────────────────
+             │ Unused
+  0x20004000 ┴───────────────────────────────────────────
+             .....
+  0x00044000 ┬─────────────────────────────────────────── F
+             │ App Flash     16336                        L
+  0x00040030 ┼─────────────────────────────────────────── A
+             │ Protected        48                        S
+  0x00040000 ┴─────────────────────────────────────────── H
+
+  R0 : 0x00000001    R6 : 0x00000000
+  R1 : 0x00000001    R7 : 0x20005080
+  R2 : 0x20005080    R8 : 0x20004AB8
+  R3 : 0x00000012    R10: 0x00000000
+  R4 : 0x20004578    R11: 0x00000005
+  R5 : 0x00041E25    R12: 0x20004610
+  R9 : 0x20004800 (Static Base Register)
+  SP : 0x20004548 (Process Stack Pointer)
+  LR : 0x00041D45
+  PC : 0x000405B2
+ YPC : 0x000405E0
+
+ APSR: N 0 Z 0 C 1 V 0 Q 0
+       GE 0 0 0 0
+ EPSR: ICI.IT 0x00
+       ThumbBit true 
+
+ Total number of grant regions defined: 14
+  Grant  0: --          Grant  5: --          Grant 10: --        
+  Grant  1: --          Grant  6: --          Grant 11: --        
+  Grant  2: 0x20005fd0  Grant  7: --          Grant 12: --        
+  Grant  3: --          Grant  8: --          Grant 13: --        
+  Grant  4: 0x20005fd8  Grant  9: --        
+
+ Cortex-M MPU
+  Region 0: [0x20004000:0x20006000], length: 8192 bytes; ReadWrite (0x3)
+    Sub-region 0: [0x20004000:0x20004400], Enabled
+    Sub-region 1: [0x20004400:0x20004800], Enabled
+    Sub-region 2: [0x20004800:0x20004C00], Enabled
+    Sub-region 3: [0x20004C00:0x20005000], Enabled
+    Sub-region 4: [0x20005000:0x20005400], Enabled
+    Sub-region 5: [0x20005400:0x20005800], Enabled
+    Sub-region 6: [0x20005800:0x20005C00], Disabled
+    Sub-region 7: [0x20005C00:0x20006000], Disabled
+  Region 1: [0x00040000:0x00044000], length: 16384 bytes; UnprivilegedReadOnly (0x2)
+    Sub-region 0: [0x00040000:0x00040800], Enabled
+    Sub-region 1: [0x00040800:0x00041000], Enabled
+    Sub-region 2: [0x00041000:0x00041800], Enabled
+    Sub-region 3: [0x00041800:0x00042000], Enabled
+    Sub-region 4: [0x00042000:0x00042800], Enabled
+    Sub-region 5: [0x00042800:0x00043000], Enabled
+    Sub-region 6: [0x00043000:0x00043800], Enabled
+    Sub-region 7: [0x00043800:0x00044000], Enabled
+  Region 2: Unused
+  Region 3: Unused
+  Region 4: Unused
+  Region 5: Unused
+  Region 6: Unused
+  Region 7: Unused
+
+To debug, run `make debug RAM_START=0x20004000 FLASH_INIT=0x40059`
+in the app's folder and open the .lst file.
+
+

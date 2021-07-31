@@ -1,3 +1,41 @@
+Update
+==========
+
+I have enabled the debug logging and I have cleared the code to the minimum versions that cause the bug, as suggested.
+
+**Tock 2.0**
+
+All versions tried (no systemcalls, only command systemcalls, only subscribe systemcalls) crash the application when executing the **svc 4** systemcall. This crash appears every time after a few seconds, in the **allow_readonly** function, called from **putnstr_async** which is called from **printf**. It seems that is caused by printf.
+
+![image info](./images/allow_readonly.png)
+
+The folder Tock_v2.0 contains the outputs: the serial debug console, the disassembly and the c program that caused the crash.
+
+Tock_v2.0/output1 has no systemcalls, just printfs.
+
+Tock_v2.0/output2 has command systemcalls & printfs.
+
+Tock_v2.0/output3 has subscribe systemcalls & printfs.
+
+
+**Old Tock 1.6**
+
+In this case, all the versions tried (no systemcalls, only command systemcalls, only subscribe systemcalls) crash the application when executing the **svc 3** systemcall. All the crashes appear in the **allow** function, called from the **putnstr_async** which is called from **printf**. It also seems to be caused by printf.
+
+However the program with command systemcalls and printfs causes the crash every time and after a few seconds. The others (no systemcalls, only subscribe systemcalls) cause it after a few tens of minutes and not every time (I had to reset the board from time to time).
+
+![image info](./images/allow.png)
+
+The folder Tock_v1.6 contains the outputs: the serial debug console, the disassembly and the c program that caused the crash.
+
+Tock_v1.6/output1 has command systemcalls & printfs.
+
+Tock_v1.6/output2 has no systemcalls, just printfs.
+
+Tock_v1.6/output3 also has no systemcalls, just printfs.
+
+
+
 Dumb Fuzzer
 ==========
 
@@ -280,7 +318,7 @@ From the LR register we can also deduce that the allow syscall was called from *
 
 I have successfully managed to re-compile my application in order to run at a fixed address and then used gdb-multiarch. I managed to get the backtrace when this fault happens.
 
-![image info](./application_allow_fault.png)
+![image info](./images/application_allow_fault.png)
 
 I seems that something strange happens inside the svc handler ***only at this combination of parameters passed to the allow syscall***
 
@@ -313,4 +351,4 @@ It basically stops if the R2 is equal to the problematic memory address 0x200050
 
 I ran gdb-multiarch on this code and if faulted when returning from the svc_handler, on the last ***bx lr*** instruction.
 
-![image info](./kenel_svc_fault.png)
+![image info](./images/kenel_svc_fault.png)
