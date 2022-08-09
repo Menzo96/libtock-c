@@ -21,12 +21,14 @@ unsigned int max_nr_syscalls;
 
 void activate_syscall(unsigned int calln)
 {
-	activate_syscall_in_table(calln, &shm->nr_active_syscalls, syscalls, shm->active_syscalls);
+	activate_syscall_in_table(calln, &shm->active_syscalls->nr, syscalls, shm->active_syscalls->sysc);
 }
 
+//TODO - may need to addapt for runner data
+//In runner it crashes because runners don't have shm initialized
 void deactivate_syscall_uniarch(unsigned int calln)
 {
-	deactivate_syscall_in_table(calln, &shm->nr_active_syscalls, syscalls, shm->active_syscalls);
+	deactivate_syscall_in_table(calln, &shm->active_syscalls->nr, syscalls, shm->active_syscalls->sysc);
 }
 
 void toggle_syscall_n(int calln, bool state, const char *arg, const char *arg_name)
@@ -84,11 +86,11 @@ int setup_syscall_group_uniarch(unsigned int group)
 			activate_syscall(i);
 	}
 
-	if (shm->nr_active_syscalls == 0) {
+	if (shm->active_syscalls->nr == 0) {
 		fuzz_log("No syscalls found in group\n");
 		return false;
 	} else {
-		fuzz_log("Found %d syscalls in group\n", shm->nr_active_syscalls);
+		fuzz_log("Found %d syscalls in group\n", shm->active_syscalls->nr);
 	}
 
 	return true;

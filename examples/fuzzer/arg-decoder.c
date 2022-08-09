@@ -104,16 +104,34 @@ static unsigned int render_syscall_prefix(struct syscallrecord *rec, char *buffe
 	unsigned int i;
 	unsigned int syscallnr;
 
+	if(bufferstart == NULL)
+	{
+		printf("render_syscall_prefix, bufferstart null\n");
+	}
+
 	syscallnr = rec->nr;
+	printf("render_syscall_prefix syscallnr: %d\n", syscallnr);
 	entry = get_syscall_entry(syscallnr);
 
+	printf("render_syscall_prefix entry->name: %p\n", entry->name);
+
+	printf("render_syscall_prefix 1\n");
+
+	printf("render_syscall_prefix entry->name: %s\n", entry->name);
+
 	sptr += snprintf(sptr, PREBUFFER_LEN, "%s(", entry->name);
+
+	printf("render_syscall_prefix 2\n");
 
 	for_each_arg(entry, i) {
 		sptr = render_arg(rec, sptr, i, entry);
 	}
 
+	printf("render_syscall_prefix 3\n");
+
 	sptr += snprintf(sptr, PREBUFFER_LEN, ") \n");
+
+	printf("render_syscall_prefix 4\n");
 
 	return sptr - bufferstart;
 }
@@ -134,16 +152,14 @@ static unsigned int render_syscall_postfix(struct syscallrecord *rec, char *buff
  */
 void output_syscall_prefix(struct syscallrecord *rec)
 {
-	static char *buffer = NULL;
 	unsigned int len;
+	printf("output_syscall_prefix 1\n");
 
-	if (buffer == NULL)
-		buffer = malloc(PREBUFFER_LEN);
+	len = render_syscall_prefix(rec, rec->prebuffer);
 
-	len = render_syscall_prefix(rec, buffer);
+	printf("output_syscall_prefix 2\n");
 
 	/* copy child-local buffer to shm, and zero out trailing bytes */
-	memcpy(rec->prebuffer, buffer, len);
 	memset(rec->prebuffer + len, 0, PREBUFFER_LEN - len);
 
 	fuzz_log(rec->prebuffer);
@@ -151,16 +167,11 @@ void output_syscall_prefix(struct syscallrecord *rec)
 
 void output_syscall_postfix(struct syscallrecord *rec)
 {
-	static char *buffer = NULL;
 	unsigned int len;
 
-	if (buffer == NULL)
-		buffer = malloc(POSTBUFFER_LEN);
-
-	len = render_syscall_postfix(rec, buffer);
+	len = render_syscall_postfix(rec, rec->postbuffer);
 
 	/* copy child-local buffer to shm, and zero out trailing bytes */
-	memcpy(rec->postbuffer, buffer, len);
 	memset(rec->postbuffer + len, 0, POSTBUFFER_LEN - len);
 	
 	fuzz_log(rec->postbuffer);

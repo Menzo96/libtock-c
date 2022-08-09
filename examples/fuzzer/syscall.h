@@ -2,10 +2,10 @@
 
 #include <stdbool.h>
 
-#define PREBUFFER_LEN	512
-#define POSTBUFFER_LEN	512
+#define PREBUFFER_LEN	256
+#define POSTBUFFER_LEN	256
 
-#define MAX_NR_SYSCALL 20
+#define MAX_NR_SYSCALL 10
 
 enum syscallstate {
 	UNKNOWN,	/* new child */
@@ -15,7 +15,7 @@ enum syscallstate {
 	AFTER,		/* returned from doing syscall. */
 };
 
-struct syscallrecord {
+typedef struct syscallrecord {
 	unsigned int nr;
 	unsigned long a1;
 	unsigned long a2;
@@ -35,7 +35,12 @@ struct syscallrecord {
 	enum syscallstate state;
 	char prebuffer[PREBUFFER_LEN];
 	char postbuffer[POSTBUFFER_LEN];
-};
+} syscallrecord_t;
+
+typedef struct activesyscalls {
+	unsigned int nr;
+	unsigned int sysc[MAX_NR_SYSCALL];
+} activesyscalls_t;	
 
 enum argtype {
 	ARG_UNDEFINED,
@@ -75,7 +80,7 @@ struct syscallentry {
 
 	unsigned int number;
 	unsigned int active_number;
-	const char name[80];
+	const char name[50];
 	const unsigned int num_args;
 	unsigned int flags;
 

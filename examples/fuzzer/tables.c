@@ -13,6 +13,7 @@
 #include "utils.h"	// ARRAY_SIZE
 #include "tock-syscalls.h"
 #include "logging.h"
+#include "runner.h"
 
 #include <console.h>
 
@@ -74,7 +75,7 @@ int validate_specific_syscall_silent(const struct syscalltable *table, int call)
 	return true;
 }
 
-void activate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, int *active_syscall)
+void activate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, unsigned int *active_syscall)
 {
 	struct syscallentry *entry = table[calln].entry;
 
@@ -93,7 +94,7 @@ void activate_syscall_in_table(unsigned int calln, unsigned int *nr_active, cons
 	}
 }
 
-void deactivate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, int *active_syscall)
+void deactivate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, unsigned int *active_syscall)
 {
 	struct syscallentry *entry;
 
@@ -123,7 +124,7 @@ void count_syscalls_enabled(void)
 {
 
 	fuzz_log("Enabled %d syscalls. Disabled %d syscalls.\n",
-		shm->nr_active_syscalls, max_nr_syscalls - shm->nr_active_syscalls);
+		shm->active_syscalls->nr, max_nr_syscalls - shm->active_syscalls->nr);
 	
 }
 
@@ -136,7 +137,7 @@ bool no_syscalls_enabled(void)
 {
 	unsigned int total;
 
-	total = shm->nr_active_syscalls;
+	total = runnerdata->active_syscalls->nr;
 
 	if (total == 0)
 		return true;
@@ -147,7 +148,7 @@ bool no_syscalls_enabled(void)
 /* Make sure there's at least one syscall enabled. */
 int validate_syscall_tables(void)
 {
-	if (shm->nr_active_syscalls == 0)
+	if (shm->active_syscalls->nr == 0)
 		return false;
 	else
 		return true;

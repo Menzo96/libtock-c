@@ -3,6 +3,8 @@
 # Specify this directory relative to the current application.
 TOCK_USERLAND_BASE_DIR = ../..
 
+PACKAGE_NAME = org.tockos.fuzzer.supervisor
+
 # Which files to compile.
 C_SRCS := $(wildcard *.c) $(wildcard **/*.c)
 

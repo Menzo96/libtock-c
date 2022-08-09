@@ -1,6 +1,7 @@
 /*
  * Functions for actually doing the system calls.
  */
+#include <stdio.h>
 #include <string.h>
 #include <tock.h>
 
@@ -13,6 +14,7 @@
 #include "tables.h"
 #include "trinity.h"
 #include "utils.h"
+#include "runner.h"
 
 void do_syscall(struct syscallrecord *rec)
 {
@@ -25,7 +27,7 @@ void do_syscall(struct syscallrecord *rec)
 	memop_return_t memop_ret;
 
 	call = rec->nr;
-	shm->stats.op_count++;
+	runnerdata->stats.op_count++;
 
 	rec->state = BEFORE;
 
@@ -63,7 +65,6 @@ void do_syscall(struct syscallrecord *rec)
 		default:
 			break;
 	}
-
 	rec->state = AFTER;
 }
 
@@ -77,11 +78,11 @@ void handle_syscall_ret(struct syscallrecord *rec)
 
 	if (rec->retval < 0) {
 		entry->failures++;
-		shm->stats.failures++;
+		runnerdata->stats.failures++;
 
 	} else {
 		entry->successes++;
-		shm->stats.successes++;
+		runnerdata->stats.successes++;
 	}
 	entry->attempted++;
 

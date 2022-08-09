@@ -11,8 +11,8 @@ extern unsigned int max_nr_syscalls;
 extern unsigned int max_nr_32bit_syscalls;
 
 void validate_specific_syscall(const struct syscalltable *table, int call);
-void activate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, int *active_syscall);
-void deactivate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, int *active_syscall);
+void activate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, unsigned int *active_syscall);
+void deactivate_syscall_in_table(unsigned int calln, unsigned int *nr_active, const struct syscalltable *table, unsigned int *active_syscall);
 
 void check_user_specified_arch(const char *arg, char **arg_name, bool *only_64bit, bool *only_32bit);
 void clear_check_user_specified_arch(const char *arg, char **arg_name);

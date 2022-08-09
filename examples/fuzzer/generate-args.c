@@ -215,6 +215,12 @@ void generate_syscall_args(struct syscallrecord *rec)
 	struct syscallentry *entry;
 
 	entry = syscalls[rec->nr].entry;
+
+	if(entry == NULL)
+	{
+		printf("entry is null\n");
+	}
+
 	rec->state = PREP;
 	if (entry->arg1type == ARG_UNDEFINED)
 		rec->a1 = (unsigned long) rand64();
